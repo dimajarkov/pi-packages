@@ -1,6 +1,19 @@
 # pi-packages
 
-Personal monorepo for independently published [Pi](https://pi.dev) packages.
+Dmitri's owned fork of [TungLamC/pi-packages](https://github.com/TungLamC/pi-packages), containing independently published [Pi](https://pi.dev) packages.
+
+## Owned inline-skills installation
+
+Install this fork at a reviewed commit:
+
+```bash
+pi install git:github.com/dimajarkov/pi-packages@<commit>
+```
+
+The repository's root Pi manifest exposes only inline-skills, not the unrelated lark-cli package or its skills.
+Dmitri's dotfiles pin the reviewed commit used on his machine.
+Remove the original `npm:@tunglam/pi-inline-skills` declaration when switching to avoid loading the extension twice.
+The original npm package and its publishing workflows remain upstream-owned; this fork is consumed directly through Git, without publishing under the original author's npm scope.
 
 ## Packages
 
@@ -9,7 +22,8 @@ Personal monorepo for independently published [Pi](https://pi.dev) packages.
 | [`@tunglam/pi-inline-skills`](packages/pi-inline-skills) | Codex-style inline `$skill` references for Pi | `pi install npm:@tunglam/pi-inline-skills` |
 | [`@tunglam/pi-lark-cli`](packages/pi-lark-cli) | Official lark-cli binary plus all official `lark-*` skills, synced with upstream releases | `pi install npm:@tunglam/pi-lark-cli` |
 
-Each directory under `packages/` is an independent npm package with its own version and Pi manifest. The repository root is private and is not itself a Pi package.
+Each directory under `packages/` is an independent npm package with its own version and Pi manifest.
+The repository root stays private for npm publishing, while its Pi manifest provides the owned inline-skills Git installation.
 
 ## Development
 

@@ -2,7 +2,9 @@
 
 ## Purpose and scope
 
-This repository is a private npm workspace for developing independently published packages for the Pi coding agent. The repository root is development infrastructure only; it is not itself a Pi package and must remain `private: true`.
+This is Dmitri's owned fork of `TungLamC/pi-packages`.
+The repository root remains `private: true` for npm publishing, but its Pi manifest intentionally exposes only inline-skills for commit-pinned Git installation.
+See `README.md` for the ownership and installation boundary.
 
 Each directory under `packages/` is an independent npm package. Keep package versions, manifests, documentation, and release decisions package-specific.
 
@@ -24,7 +26,8 @@ One-time release setup (repository/npm console, not code):
 Security boundary, stated honestly: publishing is exactly as trusted as push access to this repository — anyone who can push a `@tunglam/*` tag can publish. For this single-maintainer repository that actor is the npm owner anyway, so the defenses focus on the real threat: the unattended sync pipeline executing upstream code, which keeps strict job isolation (see below). If collaborators are ever added, branch protection requiring PRs on `main`, a tag ruleset restricting `@tunglam/*` release-tag creation, and environment required-reviewers become required.
 - `package.json` and `package-lock.json` — root workspace definition and the single dependency lockfile.
 
-Do not add a root-level `pi` manifest unless the repository is intentionally being changed into an install-all Pi package.
+Keep the root Pi manifest limited to inline-skills; installing this fork must not load lark-cli or its skills.
+The original `@tunglam` npm scope and trusted publishing configuration remain upstream-owned; consume this fork through Git rather than publishing under that scope.
 
 ## Package conventions
 

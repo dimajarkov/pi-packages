@@ -2,6 +2,9 @@
   "name": "pi-packages",
   "private": true,
   "type": "module",
+  "pi": {
+    "extensions": ["./packages/pi-inline-skills/src/index.ts"]
+  },
   "workspaces": [
     "packages/*"
   ],

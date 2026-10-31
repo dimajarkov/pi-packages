@@ -1,5 +1,5 @@
 import type { BeforeAgentStartEvent, ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-agent";
-import { mkdtemp, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
@@ -38,6 +38,14 @@ function setup(skillPath = "/unused/SKILL.md") {
 const dirs: string[] = [];
 afterEach(async () => {
 	await Promise.all(dirs.splice(0).map((dir) => rm(dir, { recursive: true, force: true })));
+});
+
+describe("owned Git package", () => {
+	it("exposes only inline-skills and stays private for npm publishing", async () => {
+		const manifest = JSON.parse(await readFile(new URL("../../../package.json", import.meta.url), "utf8"));
+		expect(manifest.private).toBe(true);
+		expect(manifest.pi).toEqual({ extensions: ["./packages/pi-inline-skills/src/index.ts"] });
+	});
 });
 
 describe("before_agent_start", () => {
